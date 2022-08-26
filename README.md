@@ -1,2 +1,2 @@
 # mytinerary-back
-mytinerary-almost-hackers back
+mytinerary-almost-hackers-back
