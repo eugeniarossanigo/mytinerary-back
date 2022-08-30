@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const cityRouter = require('./cities')
+
 
 router.get('/', function(req, res, next) {
   res.render('index', {title: 'mytynerary'})
 })
 
-router.use('/cities', cityRouter)
+
 // router.use('/comments', cityRouter)
 
 // router.get('/:id', function(req, res, next) {
