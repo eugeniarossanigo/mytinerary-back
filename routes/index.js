@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.use('/cities', cityRouter)
+// router.use('/comments', cityRouter)
 
 // router.get('/:id', function(req, res, next) {
 //   if (req.params.id == 123){
