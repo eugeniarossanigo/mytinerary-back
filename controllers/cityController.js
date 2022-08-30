@@ -1,7 +1,7 @@
 const City = require('../models/City')
 
 const cityController = {
-    createCity: async(req, res) => {
+    createCity: async (req, res) => {
         // const {city, country, photo, population, fundation, description} = req.body
         // req.body tiene todas las variables que necesito
         try {
@@ -10,17 +10,17 @@ const cityController = {
                 message: 'city created',
                 success: true
             })
-        } catch(error) {
+        } catch (error) {
             res.status(400).json({
                 message: 'could not create city',
                 success: false
             })
         }
     },
-    readCity: async(req, res) => {
-        const {id} = req.params
+    readCity: async (req, res) => {
+        const { id } = req.params
         try {
-            let city = await City.findOne({_id:id})
+            let city = await City.findOne({ _id: id })
             if (city) {
                 res.status(200).json({
                     message: 'you get the city',
@@ -33,7 +33,7 @@ const cityController = {
                     success: false
                 })
             }
-        } catch(error) {
+        } catch (error) {
             console.log(error)
             res.status(400).json({
                 message: "error",
@@ -41,7 +41,7 @@ const cityController = {
             })
         }
     },
-    readAll: async(req, res) => {
+    readAll: async (req, res) => {
         try {
             let cities = await City.find()
             if (cities) {
@@ -56,7 +56,7 @@ const cityController = {
                     success: false
                 })
             }
-        } catch(error) {
+        } catch (error) {
             console.log(error)
             res.status(400).json({
                 message: "error",
@@ -64,36 +64,52 @@ const cityController = {
             })
         }
     },
-    deleteCity: async(req, res) => {
-        const {id} = req.params
+    deleteCity: async (req, res) => {
+        const { id } = req.params
         let city
         try {
-            city = await City.findOneAndDelete({_id:id})
-            res.status(200).json({
-                message: 'you have removed the city',
-                response: city,
-                success: true
-            })
-        } catch(error) {
+            city = await City.findOneAndDelete({ _id: id })
+            if (city) {
+                res.status(200).json({
+                    message: 'you have removed the city',
+                    response: city,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not removed the city',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
             res.status(404).json({
-                message: "could not delete the city",
+                message: "error",
                 success: false
             })
         }
     },
-    updateCity: async(req, res) => {
-        const {id} = req.params
+    updateCity: async (req, res) => {
+        const { id } = req.params
         const city = req.body.data
         try {
-            let newCity = await City.findOneAndUpdate({_id:id}, city, {new: true})
-            res.status(200).json({
-                message: 'you have removed the city',
-                response: newCity,
-                success: true
-            })
-        }  catch(error) {
+            let newCity = await City.findOneAndUpdate({ _id: id }, city, { new: true })
+            if (newCity) {
+                res.status(200).json({
+                    message: 'you have updated the city',
+                    response: newCity,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not update the city',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
             res.status(400).json({
-                message: "could not update the city",
+                message: "error",
                 success: false
             })
         }
