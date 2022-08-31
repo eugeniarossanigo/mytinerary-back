@@ -41,7 +41,26 @@ const cityController = {
             })
         }
     },
+    readSome: async (req, res) => {
+        let cities
+        try {
+            let regexp = new RegExp("^"+ req.query.city)
+            cities = await City.find({city: {$regex: regexp}})
+            res.json(cities)
+        } catch (err) {
+            console.log(err)
+            res.status(500).json()
+        }
+    },
     readAll: async (req, res) => {
+        let cities
+        let query = {}
+        if (req.query.population) {
+            query.population = req.query.population
+        }
+        if (req.query.country) {
+            query.country = req.query.country
+        }
         try {
             let cities = await City.find()
             if (cities) {
