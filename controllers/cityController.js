@@ -41,24 +41,16 @@ const cityController = {
     },
     readAll: async (req, res) => {
         let cities
-        let searchCity
         let query = {}
         if (req.query.city) {
-            query.city = req.query.city
+            let regexp = new RegExp("^"+ req.query.city)
+            query.city = {$regex: regexp, $options:'i'}
         }
         try {
             cities = await City.find(query)
-            let regexp = new RegExp("^"+ req.query.city)
-            searchCity = await City.find({city: {$regex: regexp}})
-            if (searchCity.length > 0) {
+            if (cities) {
                 res.status(200).json({
-                    message: 'you get the cities that match',
-                    response: cities,
-                    success: true
-                })
-            } else if (cities) {
-                res.status(200).json({
-                    message: 'you get all the cities',
+                    message: 'you get the cities',
                     response: cities,
                     success: true
                 })
