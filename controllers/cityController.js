@@ -95,7 +95,7 @@ const cityController = {
     },
     updateCity: async (req, res) => {
         const { id } = req.params
-        const city = req.body.data
+        const city = req.body
         try {
             let newCity = await City.findOneAndUpdate({ _id: id }, city, { new: true })
             if (newCity) {
