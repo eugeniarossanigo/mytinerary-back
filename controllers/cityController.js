@@ -2,8 +2,6 @@ const City = require('../models/City')
 
 const cityController = {
     createCity: async (req, res) => {
-        // const {city, country, photo, population, fundation, description} = req.body
-        // req.body tiene todas las variables que necesito
         try {
             await new City(req.body).save()
             res.status(201).json({
@@ -41,29 +39,24 @@ const cityController = {
             })
         }
     },
-    readSome: async (req, res) => {
-        let cities
-        try {
-            let regexp = new RegExp("^"+ req.query.city)
-            cities = await City.find({city: {$regex: regexp}})
-            res.json(cities)
-        } catch (err) {
-            console.log(err)
-            res.status(500).json()
-        }
-    },
     readAll: async (req, res) => {
         let cities
+        let searchCity
         let query = {}
-        if (req.query.population) {
-            query.population = req.query.population
-        }
-        if (req.query.country) {
-            query.country = req.query.country
+        if (req.query.city) {
+            query.city = req.query.city
         }
         try {
-            let cities = await City.find()
-            if (cities) {
+            cities = await City.find(query)
+            let regexp = new RegExp("^"+ req.query.city)
+            searchCity = await City.find({city: {$regex: regexp}})
+            if (searchCity.length > 0) {
+                res.status(200).json({
+                    message: 'you get the cities that match',
+                    response: cities,
+                    success: true
+                })
+            } else if (cities) {
                 res.status(200).json({
                     message: 'you get all the cities',
                     response: cities,
@@ -136,13 +129,3 @@ const cityController = {
 }
 
 module.exports = cityController
-
-
-// {
-//     "city": "Rosario",
-//     "country": "Argentina",
-//     "photo": "asdasdasdsad.jpg",
-//     "population": 1000000,
-//     "fundation": "1950-12-12",
-//     "description": "hola"
-//     }

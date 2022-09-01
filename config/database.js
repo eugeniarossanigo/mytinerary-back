@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-//lleva 2 params= 1- link de conexión, 2- objeto con 2 propiedades en true
 mongoose.connect(
     process.env.MONGO_DB,
     {
