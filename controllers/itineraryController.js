@@ -42,6 +42,31 @@ const itineraryController = {
                 success: false
             })
         }
+    },
+    deleteItinerary: async (req, res) => {
+        const { id } = req.params
+        let itinerary
+        try {
+            itinerary = await Itinerary.findOneAndDelete({ _id: id })
+            if (itinerary) {
+                res.status(200).json({
+                    message: 'you have removed the itinerary',
+                    response: itinerary,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not removed the itinerary',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({
+                message: "error",
+                success: false
+            })
+        }
     }
 }
 module.exports = itineraryController;
