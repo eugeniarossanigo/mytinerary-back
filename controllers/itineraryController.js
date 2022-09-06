@@ -67,6 +67,39 @@ const itineraryController = {
                 success: false
             })
         }
+    },
+    readAllItineraries: async (req, res) => {
+        let itineraries
+        // let query = {}
+        // if (req.query.city) {
+        //     let regexp = new RegExp("^"+ req.query.city)
+        //     query.city = {$regex: regexp, $options:'i'}
+        // }
+        try {
+            itineraries = await Itinerary.find()
+            .populate('user', {name:1})
+            .populate('city', {city:1})
+
+            if (itineraries) {
+                res.status(200).json({
+                    message: 'you get the itineraries',
+                    response: itineraries,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not find any itineraries',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                message: "error",
+                success: false
+            })
+        }
     }
+    
 }
 module.exports = itineraryController;
