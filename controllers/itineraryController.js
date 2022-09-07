@@ -1,4 +1,5 @@
 const Itinerary = require('../models/Itinerary');
+const City = require('../models/City');
 
 const itineraryController = {
     createItinerary: async (req, res) => {
@@ -16,8 +17,6 @@ const itineraryController = {
             })
         }
     },
-
-
     updateItinerary: async (req, res) => {
         const { id } = req.params
         const itinerary = req.body
@@ -69,14 +68,14 @@ const itineraryController = {
         }
     },
     readAllItineraries: async (req, res) => {
+        const { id } = req.params
         let itineraries
-        // let query = {}
-        // if (req.query.city) {
-        //     let regexp = new RegExp("^"+ req.query.city)
-        //     query.city = {$regex: regexp, $options:'i'}
-        // }
+        let query = {}
+        if (req.query.city) {
+            query.city = req.query.city
+        }
         try {
-            itineraries = await Itinerary.find()
+            itineraries = await Itinerary.find(query)
             .populate('user', {name:1})
             .populate('city', {city:1})
 
