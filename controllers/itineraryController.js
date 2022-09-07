@@ -1,5 +1,4 @@
 const Itinerary = require('../models/Itinerary');
-const City = require('../models/City');
 
 const itineraryController = {
     createItinerary: async (req, res) => {
@@ -68,14 +67,15 @@ const itineraryController = {
         }
     },
     readAllItineraries: async (req, res) => {
-        const { id } = req.params
-        let itineraries
         let query = {}
         if (req.query.city) {
             query.city = req.query.city
         }
+        if (req.query.user) {
+            query.user = req.query.user
+        }
         try {
-            itineraries = await Itinerary.find(query)
+            let itineraries = await Itinerary.find(query)
             .populate('user', {name:1})
             .populate('city', {city:1})
 
