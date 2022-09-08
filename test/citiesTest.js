@@ -35,34 +35,10 @@ describe('POST /cities', function () {
             })
             .expect(400, done)
     })
-
-
+})
 
 
 describe('PUT /cities', function () {
-    it('Must create city', function (done) {
-        let cityTest = {
-            city: "CityTest",
-            province: "Test",
-            country: "Argentina",
-            photo: "test.jpg",
-            population: "307564",
-            fundation: "1536-01-01",
-            description: "testttttttttttttt"
-        }
-        request(app)
-            .post('/cities')
-            .send(cityTest)
-            .expect(201)
-            .end(function (err, res) {
-                if (err) {
-                    return done(err);
-                }
-                cityTest = res.body;
-                done();
-            });
-    })
-})
     it('Must update city', function (done) {
         let cityTestUpdate = {
             city: "Prueba",
@@ -78,9 +54,4 @@ describe('PUT /cities', function () {
             .send(cityTestUpdate)
             .expect(200, done)
     })
-
 })
-
-
-
-
