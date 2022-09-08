@@ -15,7 +15,7 @@ Itinerary.create(
     },
     {
         name: 'City ice tour',
-        user: '6318aff24a57ccc17393d91a',
+        user: '6318aff24a57ccc17393d917',
         city: '631768d0c561b3f4a98d5534',
         price: 3300,
         likes: [3],
@@ -82,7 +82,7 @@ Itinerary.create(
     // tupungato
     {
         name: 'The wine road',
-        user: '6318aff24a57ccc17393d91a',
+        user: '6318aff24a57ccc17393d917',
         city: '631768d0c561b3f4a98d553b',
         price: 7000,
         likes: [2],
@@ -98,5 +98,82 @@ Itinerary.create(
         likes: [1],
         tags: ['tucuman', 'casita', 'history', 'independency'],
         duration: 5
+    },
+    // calafate
+    {
+        name: 'Chaltén fly',
+        user: '6318aff24a57ccc17393d91a',
+        city: '631768d0c561b3f4a98d5534',
+        price: 8000,
+        likes: [7],
+        tags: ['patagonia', 'calafate', 'chalten', 'gitzroy'],
+        duration: 8
+    },
+    // bariloche
+    {
+        name: 'Chocolate break',
+        user: '6318aff24a57ccc17393d91a',
+        city: '631768d0c561b3f4a98d553c',
+        price: 2500,
+        likes: [5],
+        tags: ['bariloche', 'center', 'chocolate', 'llaollao'],
+        duration: 4
+    },
+    {
+        name: 'Seven Lakes road',
+        user: '6318aff24a57ccc17393d91b',
+        city: '631768d0c561b3f4a98d553c',
+        price: 5500,
+        likes: [5],
+        tags: ['bariloche', 'nahuelhuapi', 'espejo', 'correntoso'],
+        duration: 6
+    },
+    // angostura
+    {
+        name: 'Parque Nacional Arrayanes',
+        user: '6318aff24a57ccc17393d916',
+        city: '631768d0c561b3f4a98d5539',
+        price: 5500,
+        likes: [4],
+        tags: ['villalaangostura', 'arrayanes', 'boat', 'trekking'],
+        duration: 6
+    },
+    {
+        name: 'City and lake bike tour',
+        user: '6318aff24a57ccc17393d916',
+        city: '631768d0c561b3f4a98d5539',
+        price: 3000,
+        likes: [3],
+        tags: ['villalaangostura', 'lakes', 'biketour', 'chocolate'],
+        duration: 5
+    },
+    // ushuaia
+    {
+        name: 'The end of the world train',
+        user: '6318aff24a57ccc17393d918',
+        city: '631768d0c561b3f4a98d5536',
+        price: 5000,
+        likes: [4],
+        tags: ['ushuaia', 'train', 'park', 'tierradelfuego'],
+        duration: 7
+    },
+    // carlospaz
+    {
+        name: 'Welcome to Carlos Paz',
+        user: '6318aff24a57ccc17393d916',
+        city: '631768d0c561b3f4a98d553f',
+        price: 2300,
+        likes: [2],
+        tags: ['córdoba', 'carlospaz', 'biketour', 'cucu'],
+        duration: 4
+    },
+    {
+        name: 'In the Altas Cumbres',
+        user: '6318aff24a57ccc17393d91b',
+        city: '6318aff24a57ccc17393d918',
+        price: 7000,
+        likes: [5],
+        tags: ['córdoba', 'carlospaz', 'altascumbres', 'condor'],
+        duration: 7
     }
 )
