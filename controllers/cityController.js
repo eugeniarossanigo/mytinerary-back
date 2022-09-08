@@ -3,10 +3,11 @@ const City = require('../models/City')
 const cityController = {
     createCity: async (req, res) => {
         try {
-            await new City(req.body).save()
+            let city = await new City(req.body).save()
             res.status(201).json({
                 message: 'city created',
-                success: true
+                success: true,
+                id : city._id
             })
         } catch (error) {
             res.status(400).json({
