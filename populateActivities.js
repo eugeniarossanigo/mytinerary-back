@@ -158,5 +158,130 @@ Activity.create(
         name: 'Parque Nacional Aconquija',
         photo: 'http://drive.google.com/uc?export=view&id=1OZVkpejsVqYB8Vve1LH4SjdulHpKSwPj',
         itinerary: '6318b8f20c1f1f1e4d58e2c5'
+    },
+    // calafate
+    {
+        name: 'Laguna Torre',
+        photo: 'http://drive.google.com/uc?export=view&id=1DrZTALFn_vJjlFK5KRfPTMcmtZvG5vf4',
+        itinerary: '6319da0033ca9fa170cf4266'
+    },
+    {
+        name: 'Monte Fitz Roy',
+        photo: 'http://drive.google.com/uc?export=view&id=1yJ84ERBlV49upa8TzzWJXcxw71dw7C8e',
+        itinerary: '6319da0033ca9fa170cf4266'
+    },
+    {
+        name: 'Corrillo del Salto',
+        photo: 'http://drive.google.com/uc?export=view&id=1vN1WP_VisxbJGDp8iQEDtHXHDsgoUakr',
+        itinerary: '6319da0033ca9fa170cf4266'
+    },
+    // bariloche
+    {
+        name: 'Civic center historic walk',
+        photo: 'http://drive.google.com/uc?export=view&id=1W_7r4fomanUzrVghh4dvNqRWNTq4pVVW',
+        itinerary: '6319da0033ca9fa170cf4267'
+    },
+    {
+        name: 'Fenoglio chocolate',
+        photo: 'http://drive.google.com/uc?export=view&id=1Goh4EcMRPYbXKMogyxSO_5QX41vPFkvS',
+        itinerary: '6319da0033ca9fa170cf4267'
+    },
+    {
+        name: 'Llao llao hotel',
+        photo: 'http://drive.google.com/uc?export=view&id=1Gj9tzcDVmfMNZCls3BSM-uNM_PsRJxOD',
+        itinerary: '6319da0033ca9fa170cf4267'
+    },
+    {
+        name: 'Correntoso lake',
+        photo: 'http://drive.google.com/uc?export=view&id=1rq3OV-R_z7AvvekOs1VMH0Jx7dMBKqKu',
+        itinerary: '6319da0033ca9fa170cf4268'
+    },
+    {
+        name: 'Espejo lake',
+        photo: 'http://drive.google.com/uc?export=view&id=172E2SCqQmxeS0RA_2nvTiAPa--oZmbfa',
+        itinerary: '6319da0033ca9fa170cf4268'
+    },
+    {
+        name: 'Nahuel Huapi lake',
+        photo: 'http://drive.google.com/uc?export=view&id=1YgfN3IhovyMAXMmj8GqeC2vdo7vdNM9x',
+        itinerary: '6319da0033ca9fa170cf4268'
+    },
+    // villa la angostura
+    {
+        name: 'Catamaran trip',
+        photo: 'http://drive.google.com/uc?export=view&id=1_4AqNJu_egE61p_miiXG5vKrb6vzaITp',
+        itinerary: '6319da0033ca9fa170cf4269'
+    },
+    {
+        name: 'Isla Victoria',
+        photo: 'http://drive.google.com/uc?export=view&id=1KaTjGP2WYsnraJrh47eE3ldFHd7-bz7U',
+        itinerary: '6319da0033ca9fa170cf4269'
+    },
+    {
+        name: 'Arrayanes forest',
+        photo: 'http://drive.google.com/uc?export=view&id=1fh_8w-2BZ6bnMF5iUW8I9D-zqBTqfW5d',
+        itinerary: '6319da0033ca9fa170cf4269'
+    },
+    {
+        name: 'Bike tour',
+        photo: 'http://drive.google.com/uc?export=view&id=1m-SmOod9U_JJNjvhm0K4k4mmszUrA4P_',
+        itinerary: '6319da0033ca9fa170cf426a'
+    },
+    {
+        name: 'Correntoso and Espejo lake',
+        photo: 'http://drive.google.com/uc?export=view&id=1mwGCZycTD0-9EvTHS1lfJggyfBe-EX58',
+        itinerary: '6319da0033ca9fa170cf426a'
+    },
+    {
+        name: 'Luncha al Bosque Chocolate',
+        photo: 'http://drive.google.com/uc?export=view&id=1uGUWSX2hZxBkK9taaRBywjyIjIuWREQw',
+        itinerary: '6319da0033ca9fa170cf426a'
+    },
+    // ushuaia
+    {
+        name: 'Tourist trip on the train',
+        photo: 'http://drive.google.com/uc?export=view&id=18ifYMhP2fOeyUivO5IwpFh3qik4Ley5P',
+        itinerary: '6319da0033ca9fa170cf426b'
+    },
+    {
+        name: 'Parque Nacional Tierra del Fuego',
+        photo: 'http://drive.google.com/uc?export=view&id=1KpLvwWKoMear_S0Kf_3fQIWcWEk2bko8',
+        itinerary: '6319da0033ca9fa170cf426b'
+    },
+    {
+        name: 'Lunch at the train bar',
+        photo: 'http://drive.google.com/uc?export=view&id=1JdZkhFQHP6z5vHjwm_bK9F5miLsdDELl',
+        itinerary: '6319da0033ca9fa170cf426b'
+    },
+    // Córdoba
+    {
+        name: 'Chairlift to Cerro de la cruz',
+        photo: 'http://drive.google.com/uc?export=view&id=1xPXCwQ-ky4nto7chZKiZxuQHoks6uJPF',
+        itinerary: '6319da0033ca9fa170cf426c'
+    },
+    {
+        name: 'Cucú clock',
+        photo: 'http://drive.google.com/uc?export=view&id=1idtF_7yZveFdogQu_cHc5JpNeXQRGbgq',
+        itinerary: '6319da0033ca9fa170cf426c'
+    },
+    {
+        name: 'City ​​bike ride',
+        photo: 'http://drive.google.com/uc?export=view&id=15oMjhA5b6DcH7xepaJcdb2LkCOZiSqAz',
+        itinerary: '6319da0033ca9fa170cf426c'
+    },
+    {
+        name: 'Quebrada del Condorito National Park',
+        photo: 'http://drive.google.com/uc?export=view&id=1hfjIo-I1mhlh5Pty100p7E0xhudv8Gnh',
+        itinerary: '6319da0033ca9fa170cf426d'
+    },
+    {
+        name: 'Lágrima del Indio waterfall',
+        photo: 'http://drive.google.com/uc?export=view&id=1ajFZqD3ISppZldvT2moDjHVGvnWgXOWT',
+        itinerary: '6319da0033ca9fa170cf426d'
+    },
+    {
+        name: 'Quebrada del Batan Viewpoint',
+        photo: 'http://drive.google.com/uc?export=view&id=1I_ycqK8jQxCnHi6gWsKEYBuHvfqa-ACl',
+        itinerary: '6319da0033ca9fa170cf426d'
     }
 )
