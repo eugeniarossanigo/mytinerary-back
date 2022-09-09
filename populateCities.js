@@ -43,7 +43,7 @@ City.create({
     description: 'Rosario is the largest city in the central Argentina province of Santa Fe. The city is located 300 km (186 mi) northwest of Buenos Aires, on the west bank of the Paraná River. Is the third-most populous city in the country, and is also the most populous city in Argentina that is not a capital. UPDATE'
 },
 {
-    city: 'Ushuahia',
+    city: 'Ushuaia',
     province: 'Tierra del Fuego',
     country: 'Argentina',
     photo: 'http://drive.google.com/uc?export=view&id=1k3yQUjvtK_EYzfdcoZcFei4wxZ3u3keH',

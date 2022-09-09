@@ -3,10 +3,11 @@ const City = require('../models/City')
 const cityController = {
     createCity: async (req, res) => {
         try {
-            await new City(req.body).save()
+            let city = await new City(req.body).save()
             res.status(201).json({
                 message: 'city created',
-                success: true
+                success: true,
+                id : city._id
             })
         } catch (error) {
             res.status(400).json({
@@ -40,14 +41,13 @@ const cityController = {
         }
     },
     readAll: async (req, res) => {
-        let cities
         let query = {}
         if (req.query.city) {
             let regexp = new RegExp("^"+ req.query.city)
             query.city = {$regex: regexp, $options:'i'}
         }
         try {
-            cities = await City.find(query)
+            let cities = await City.find(query)
             if (cities) {
                 res.status(200).json({
                     message: 'you get the cities',
