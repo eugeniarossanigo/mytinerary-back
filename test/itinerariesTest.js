@@ -47,6 +47,6 @@ describe('DELETE /itineraries', function () {
         request(app)
             .del('/itineraries/'+id)
             .expect(200, done)
-            })
     })
+})
 
