@@ -65,8 +65,7 @@ const userController = {
             if (user) {
                 user.verified = true
                 await user.save()
-                res.redirect(301, 'https://www.google.com')
-
+                res.redirect(301, 'http://my-tinerary-front-almosthacker.herokuapp.com/')
             } else {
                 res.status(400).json({
                     message: "mail doesn't have account yet",
@@ -92,12 +91,9 @@ const userController = {
                     menssage: "User doesn't exists, please sign up"
                 })
             } else if (user.verified) {
-
                 const checkPass = user.password.filter(passElement => bcryptjs.compareSync(password, passElement))
                 if (from === 'from') {
-
                     if (checkPass.length > 0) {
-
                         const loginUser = {
                             id: user._id,
                             name: user.name,
@@ -106,7 +102,6 @@ const userController = {
                             from: user.from,
                             photo: user.photo
                         }
-
                         user.logged = true
                         await user.save()
 
@@ -121,7 +116,6 @@ const userController = {
                             menssage: 'Username or password incorrect'
                         })
                     }
-
                 } else {
                     if (checkPass.length > 0) {
 
@@ -133,7 +127,6 @@ const userController = {
                             from: user.from,
                             photo: user.photo
                         }
-
                         user.logged = true
                         await user.save()
 
@@ -155,7 +148,6 @@ const userController = {
                     message: 'Please, verify your email account and try again'
                 })
             }
-
         } catch (error) {
             console.log(error)
             res.status(400).json({
@@ -163,7 +155,6 @@ const userController = {
                 message: 'Sign In ERROR, try again later'
             })
         }
-
     },
 
     // signOut: async() => {},
