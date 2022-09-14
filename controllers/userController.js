@@ -2,7 +2,6 @@ const User = require('../models/User');
 const crypto = require('crypto')
 const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail');
-const { findOne } = require('../models/Itinerary');
 const Joi = require ('joi')
 const { string, date } = require('joi')
 
@@ -53,11 +52,11 @@ const userController = {
                 } else {
                     user.from.push(from)
                     user.verified = true
-                    user.password = bcryptjs.hashSync(password, 10)
+                    user.password.push(bcryptjs.hashSync(password, 10))
                     await user.save()
-                    res.status(200).json({
+                    res.status(201).json({
                         message: 'user signed up from ' + from,
-                        success: false
+                        success: true
                     })
                 }
             }
@@ -111,7 +110,6 @@ const userController = {
                             name: user.name,
                             mail: user.mail,
                             role: user.role,
-                            // from: user.from,
                             photo: user.photo
                         }
                         user.logged = true
@@ -130,7 +128,6 @@ const userController = {
                     }
                 } else {
                     if (checkPass.length > 0) {
-
                         const loginUser = {
                             id: user._id,
                             name: user.name,
@@ -145,7 +142,7 @@ const userController = {
                         res.status(200).json({
                             success: true,
                             response: { user: loginUser },
-                            menssage: 'Welcome' + user.name
+                            menssage: 'Welcome ' + user.name
                         })
                     } else {
                         res.status(400).json({
@@ -169,22 +166,33 @@ const userController = {
         }
     },
 
-    // signOut: async() => {},
+    signOut: async(req, res) => {
+        const { id } = req.params
 
-    // createUser: async (req, res) => {
-    //     try {
-    //         let user = await new User(req.body).save()
-    //         res.status(201).json({
-    //             message: 'user created',
-    //             response: user,
-    //             success: true
-    //         })
-    //     } catch (error) {
-    //         res.status(400).json({
-    //             message: 'could not create user',
-    //             success: false
-    //         })
-    //     }
-    // }
+        try {
+            let user = await User.findOne({ _id: id })
+            if (user) {
+                user.logged = false
+                await user.save()
+                res.status(200).json({
+                    success: true,
+                    menssage: 'Bye ' + user.name
+                })
+            } else {
+                res.status(401).json({
+                    success: false,
+                    message: 'There is not user logged'
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                success: false,
+                message: 'Sign out ERROR, try again later'
+            })
+
+        }
+    }
 }
+
 module.exports = userController;
