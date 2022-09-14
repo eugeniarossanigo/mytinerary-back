@@ -2,9 +2,21 @@ const User = require('../models/User');
 const crypto = require('crypto')
 const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail');
+const Joi = require ('joi')
+const { string, date } = require('joi')
+
+const validator = Joi.object({
+    "name":Joi.string,
+    "lastName":Joi.string,
+    "mail":Joi.string().min(3).email(),
+    "password":Joi.string().pattern(/^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/),
+    "photo":Joi.string().uri(),
+    "country":Joi.string,
+    "role":Joi.string,
+    "from":Joi.string
+})
 
 const userController = {
-
     signUp: async (req, res) => {
         let { name, lastName, mail, password, photo, country, role, from } = req.body
         //from, logged, code
@@ -98,7 +110,6 @@ const userController = {
                             name: user.name,
                             mail: user.mail,
                             role: user.role,
-                            from: user.from,
                             photo: user.photo
                         }
                         user.logged = true
