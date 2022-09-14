@@ -11,7 +11,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var cityRouter = require('./routes/cities');
-var userRouter = require('./routes/users');
+var userRouter = require('./routes/auth');
 var itineraryRouter = require('./routes/itineraries');
 var activityRouter = require('./routes/activities');
 var commentRouter = require('./routes/comments');
