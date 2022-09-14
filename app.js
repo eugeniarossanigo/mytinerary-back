@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/cities', cityRouter)
+app.use('/cities', cityRouter);
 app.use('/auth', userRouter);
 app.use('/itineraries', itineraryRouter);
 app.use('/activities', activityRouter);
