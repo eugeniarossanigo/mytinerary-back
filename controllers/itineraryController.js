@@ -1,4 +1,17 @@
 const Itinerary = require('../models/Itinerary');
+const Joi = require ('joi')
+const { string, date } = require('joi')
+
+
+const validador = Joi.object({
+    "name":Joi.string,
+    "user":Joi.string, 
+    "city":Joi.string, 
+    "price":Joi.number(),
+    "likes":Joi.number(),
+    "tags": Joi.number(),
+    "duration":Joi.number(),
+})
 
 const itineraryController = {
     createItinerary: async (req, res) => {
