@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const { signUp, verifyMail, signIn, signOut } = require ('../controllers/userController')
+const { signUp, verifyMail, signIn, signOut, readUsers } = require ('../controllers/userController')
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
 router.get('/verify/:code', verifyMail);
-router.get('/signout/:id', signOut)
+router.get('/signout/:id', signOut);
+router.get('/', readUsers)
 
 module.exports = router;
