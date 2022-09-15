@@ -99,7 +99,7 @@ const userController = {
             if (!user) {
                 res.status(404).json({
                     success: false,
-                    menssage: "User doesn't exists, please sign up"
+                    message: "User doesn't exists, please sign up"
                 })
             } else if (user.verified) {
                 const checkPass = user.password.filter(passElement => bcryptjs.compareSync(password, passElement))
@@ -110,6 +110,7 @@ const userController = {
                             name: user.name,
                             mail: user.mail,
                             role: user.role,
+                            from: user.from,
                             photo: user.photo
                         }
                         user.logged = true
@@ -118,12 +119,12 @@ const userController = {
                         res.status(200).json({
                             success: true,
                             response: { user: loginUser },
-                            menssage: 'Welcome' + user.name
+                            message: 'Welcome' + user.name
                         })
                     } else {
                         res.status(400).json({
                             success: false,
-                            menssage: 'Username or password incorrect'
+                            message: 'Username or password incorrect'
                         })
                     }
                 } else {
@@ -142,12 +143,12 @@ const userController = {
                         res.status(200).json({
                             success: true,
                             response: { user: loginUser },
-                            menssage: 'Welcome ' + user.name
+                            message: 'Welcome ' + user.name
                         })
                     } else {
                         res.status(400).json({
                             success: false,
-                            menssage: 'Invalid credentials'
+                            message: 'Invalid credentials'
                         })
                     }
                 }
@@ -167,16 +168,16 @@ const userController = {
     },
 
     signOut: async(req, res) => {
-        const { id } = req.params
+        const { mail } = req.body
 
         try {
-            let user = await User.findOne({ _id: id })
+            let user = await User.findOne({ mail })
             if (user) {
                 user.logged = false
                 await user.save()
                 res.status(200).json({
                     success: true,
-                    menssage: 'Bye ' + user.name
+                    message: 'Bye ' + user.name
                 })
             } else {
                 res.status(401).json({
@@ -191,6 +192,34 @@ const userController = {
                 message: 'Sign out ERROR, try again later'
             })
 
+        }
+    },
+    readUsers: async (req, res) => {
+        // const { mail } = req.body
+        let query = {}
+        if (req.query.mail) {
+            query.mail = req.query.mail
+        }
+        try {
+            let user = await Itinerary.find(query)
+            if (user) {
+                res.status(200).json({
+                    message: 'you get the user',
+                    response: user,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not find the user',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                message: "error",
+                success: false
+            })
         }
     }
 }
