@@ -168,10 +168,10 @@ const userController = {
     },
 
     signOut: async(req, res) => {
-        const { id } = req.params
+        const { mail } = req.body
 
         try {
-            let user = await User.findOne({ _id: id })
+            let user = await User.findOne({ mail })
             if (user) {
                 user.logged = false
                 await user.save()

@@ -5,7 +5,7 @@ const { signUp, verifyMail, signIn, signOut, readUsers } = require ('../controll
 router.post('/signup', signUp);
 router.post('/signin', signIn);
 router.get('/verify/:code', verifyMail);
-router.get('/signout/:id', signOut);
+router.post('/signout', signOut);
 router.get('/', readUsers)
 
 module.exports = router;
