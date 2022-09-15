@@ -6,21 +6,21 @@ const Joi = require ('joi')
 const { string, date } = require('joi')
 
 const validator = Joi.object({
-    "name":Joi.string,
-    "lastName":Joi.string,
-    "mail":Joi.string().min(3).email(),
-    "password":Joi.string().pattern(/^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/),
-    "photo":Joi.string().uri(),
-    "country":Joi.string,
-    "role":Joi.string,
-    "from":Joi.string
+    name:Joi.string().min(3).message('INVALID_NAME_LENGTH'), 
+    lastName:Joi.string().min(3).message('INVALID_LASTNAME_LENGTH'),
+    mail:Joi.string().min(3).email().message('INVALID_EMAIL'),
+    password:Joi.string().pattern(new RegExp(/^[a-zA-Z0-9]{8,20}$/)).message('INVALID_PASSWORD'),
+    photo:Joi.string().uri().message('INVALID_PHOTO_URI'),
+    country:Joi.string(),
+    role:Joi.string(),
+    from:Joi.string()
 })
 
 const userController = {
     signUp: async (req, res) => {
         let { name, lastName, mail, password, photo, country, role, from } = req.body
-        //from, logged, code
         try {
+            let result = await validator.validateAsync(req.body)
             let user = await User.findOne({ mail })
             if (!user) {
                 let logged = false
@@ -63,7 +63,7 @@ const userController = {
         } catch (error) {
             console.log(error)
             res.status(400).json({
-                message: "couldn't signed up",
+                message: error.message,
                 success: false
             })
         }
