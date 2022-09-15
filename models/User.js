@@ -23,7 +23,12 @@ const userSchema = new mongoose.Schema({
     }],
     photo: {
         type: String,
-        required: true
+        required: true,
+        validate: function(value){
+            if(!value.startWith('http')){
+                throw new Error('URL must start with http')
+            }
+        }
     },
     country: {
         type: String, 
