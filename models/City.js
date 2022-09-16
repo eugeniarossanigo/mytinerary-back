@@ -19,7 +19,7 @@ const citiesSchema = new mongoose.Schema({
         type: String, 
         required: true,
         validate: function(value){
-            if(!value.startWith('http')){
+            if(!value.startsWith('http')){
                 throw new Error('URL must start with http')
             }
         }
