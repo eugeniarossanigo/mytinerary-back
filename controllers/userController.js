@@ -9,7 +9,7 @@ const validator = Joi.object({
     name:Joi.string().min(3).message('INVALID_NAME_LENGTH'), 
     lastName:Joi.string().min(3).message('INVALID_LASTNAME_LENGTH'),
     mail:Joi.string().min(3).email().message('INVALID_EMAIL'),
-    password:Joi.string().pattern(new RegExp(/^[a-zA-Z0-9]{8,20}$/)).message('INVALID_PASSWORD'),
+    password:Joi.string().min(8).max(50).message('INVALID_PASSWORD'),
     photo:Joi.string().uri().message('INVALID_PHOTO_URI'),
     country:Joi.string(),
     role:Joi.string(),
@@ -37,6 +37,7 @@ const userController = {
                 } else {
                     verified = true
                     password = bcryptjs.hashSync(password, 10)
+                    result = await validator.validateAsync({name, lastName, mail, photo, country, role, from})
                     user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], verified, logged, code }).save()
                     res.status(201).json({
                         message: 'user signed up from ' + from,
@@ -133,7 +134,6 @@ const userController = {
                             name: user.name,
                             mail: user.mail,
                             role: user.role,
-                            from: user.from,
                             photo: user.photo
                         }
                         user.logged = true
@@ -195,7 +195,6 @@ const userController = {
         }
     },
     readUsers: async (req, res) => {
-        // const { mail } = req.body
         let query = {}
         if (req.query.mail) {
             query.mail = req.query.mail
