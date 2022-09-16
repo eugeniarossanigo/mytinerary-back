@@ -8,48 +8,29 @@ User.create(
         lastName: 'Rossanigo',
         mail: 'eugeniarossanigo@gmail.com',
         password: 'Euge1234',
-        photo: 'https://image.shutterstock.com/image-photo/asian-female-engineer-working-on-600w-662881189.jpg',
-        country: 'Argentina'
+        photo: 'https://img.freepik.com/vector-premium/perfil-avatar-mujer-icono-redondo_24640-14042.jpg',
+        country: 'Argentina',
+        role: 'user',
+        from: 'form'
     },
     {
         name: 'Marcos',
         lastName: 'Amuchastegui',
-        mail: 'marcosamuchastegui@gmail.com',
+        mail: 'amuchasteguimarcos317@gmail.com',
         password: 'Marcos1234',
-        photo: 'https://image.shutterstock.com/image-photo/sofware-developer-thinking-while-touching-600w-2108122583.jpg',
-        country: 'Argentina'
+        photo: 'https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg',
+        country: 'Argentina',
+        role: 'user',
+        from: 'form'
     },
     {
-        name: 'Mariah',
-        lastName: 'Evans',
-        mail: 'mariahevans@gmail.com',
-        password: 'Mariah1234',
-        photo: 'https://image.shutterstock.com/image-photo/asian-female-engineer-working-on-600w-662881189.jpg',
-        country: 'United States'
-    },
-    {
-        name: 'John',
-        lastName: 'Doe',
-        mail: 'johndoe@gmail.com',
-        password: 'John1234',
-        photo: 'https://image.shutterstock.com/image-photo/successful-creative-director-working-on-600w-2136788115.jpg',
-        country: 'United States'
-    },
-    {
-        name: 'Emmanuelle',
-        lastName: 'Canet',
-        mail: 'emmanuellecanet@gmail.com',
-        password: 'Emma1234',
-        photo: 'https://image.shutterstock.com/image-photo/asian-female-engineer-working-on-600w-662881189.jpg',
-        country: 'France'
-    },
-    {
-        name: 'Vincenzo',
-        lastName: 'De Luca',
-        mail: 'vincenzodeluca@gmail.com',
-        password: 'Vince1234',
-        photo: 'https://image.shutterstock.com/image-photo/successful-creative-director-working-on-600w-2136788115.jpg',
-        country: 'Italy'
+        name: 'Hector',
+        lastName: 'Garay',
+        mail: 'hectorgaray@gmail.com',
+        password: 'Hector1234',
+        photo: 'https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14046.jpg',
+        country: 'Chile',
+        role: 'user',
+        from: 'form'
     }
 )
-
