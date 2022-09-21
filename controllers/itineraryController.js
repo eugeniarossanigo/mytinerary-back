@@ -1,6 +1,7 @@
 const Itinerary = require('../models/Itinerary');
 const Joi = require ('joi')
-const { string, date } = require('joi')
+const { string, date } = require('joi');
+const { json } = require('express');
 
 
 const validator = Joi.object({
@@ -108,6 +109,41 @@ const itineraryController = {
         } catch (error) {
             console.log(error)
             res.status(400).json({
+                message: "error",
+                success: false
+            })
+        }
+    },
+
+    likeDislike: async (req,res) => {
+        let { id } = req.params
+        let userId = req.user.id
+        console.log(id)
+
+        try {
+            let itinerary = await Itinerary.findOne({_id: id})
+            console.log(itinerary.likes)
+            if (itinerary && itinerary.likes.includes(userId)) {
+                await Itinerary.findOneAndUpdate({_id: id}, {$pull: {likes: userId}}, {new:true})
+                res.status(200).json({
+                    message: "itinerary disliked",
+                    success: true
+                })
+            } else if (itinerary && !itinerary.likes.includes(userId)) {
+                await Itinerary.findOneAndUpdate({_id: id}, {$push: {likes: userId}}, {new:true})
+                res.status(200).json({
+                    message: "itinerary liked",
+                    success: true
+                })
+            } else {
+                res.status(400).json({
+                    message: "itinerary not found",
+                    success: true
+                })
+            }
+        } catch(error) {
+            console.log(error)
+            res.json({
                 message: "error",
                 success: false
             })

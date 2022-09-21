@@ -102,15 +102,15 @@ const userController = {
                     if (checkPass.length > 0) {
                         user.logged = true
                         await user.save()
-
                         const loginUser = {
                             id: user._id,
                             name: user.name,
+                            lastname: user.lastName,
                             mail: user.mail,
+                            photo: user.photo,
                             role: user.role,
-                            photo: user.photo
                         }
-                        const token = jwt.sign({id: user._id, role: user.role}, process.env.KEY_JWT, {expiresIn: 60*60*24})
+                        const token = jwt.sign({id: user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})
 
                         res.status(200).json({
                             success: true,
@@ -139,11 +139,12 @@ const userController = {
         }
     },
 
-    signInToken:(req, res) => {
-        if (req.user !== null) {            
+    verifyToken:(req, res) => {
+        if (req.user !== null) {
+            const token = jwt.sign({id: req.user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})   
             res.status(200).json({
                 success: true,
-                response: { user: req.user },
+                response: { user: req.user, token: token },
                 message: 'Welcome ' + req.user.name
             })
         } else {
