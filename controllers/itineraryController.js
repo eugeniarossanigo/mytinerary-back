@@ -116,30 +116,36 @@ const itineraryController = {
     },
 
     likeDislike: async (req,res) => {
-        let { id } = req.user 
-        let { itineraryId } = req.body
-        console.log(req.body)
-        console.log(req.user)
-        try{
-            let itinerary = await Itinerary.findOne({_id:itineraryId})
-            if(itinerary && itinerary.likes.includes(userId)){
-                await itinerary.findOneAndUpdate({_id:id},{$pull:{likes:userId}},{new:true})
+        let { id } = req.params
+        let userId = req.user.id
+        console.log(id)
+
+        try {
+            let itinerary = await Itinerary.findOne({_id: id})
+            console.log(itinerary.likes)
+            if (itinerary && itinerary.likes.includes(userId)) {
+                await Itinerary.findOneAndUpdate({_id: id}, {$pull: {likes: userId}}, {new:true})
                 res.status(200).json({
-                    message:"itinerary desliked",
-                    success:true
+                    message: "itinerary disliked",
+                    success: true
                 })
-            }else{
-                await itinerary.findOneAndUpdate({_id:id},{$push:{likes:userId}}, {new:true})
+            } else if (itinerary && !itinerary.likes.includes(userId)) {
+                await Itinerary.findOneAndUpdate({_id: id}, {$push: {likes: userId}}, {new:true})
                 res.status(200).json({
-                    message:"itinerary liked",
-                    success:true
+                    message: "itinerary liked",
+                    success: true
+                })
+            } else {
+                res.status(400).json({
+                    message: "itinerary not found",
+                    success: true
                 })
             }
-        }catch(error){
+        } catch(error) {
             console.log(error)
             res.json({
-                message:"error",
-                success:false
+                message: "error",
+                success: false
             })
         }
     }

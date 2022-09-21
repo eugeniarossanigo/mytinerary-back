@@ -6,7 +6,6 @@ const Joi = require ('joi')
 const { string, date } = require('joi')
 const jwt = require('jsonwebtoken')
 
-
 const validator = Joi.object({
     name:Joi.string().min(3).message('INVALID_NAME_LENGTH'), 
     lastName:Joi.string().min(3).message('INVALID_LASTNAME_LENGTH'),
@@ -29,23 +28,16 @@ const userController = {
                 let verified = false
                 let code = crypto.randomBytes(15).toString('hex')
                 if (from === 'form') {
-                    password = bcryptjs.hashSync(password, 10)
-                    user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], logged, verified, code }).save()
                     sendMail(mail, code)
-                    res.status(201).json({
-                        message: 'user signed up from form',
-                        success: true
-                    })
                 } else {
                     verified = true
-                    password = bcryptjs.hashSync(password, 10)
-                    result = await validator.validateAsync({name, lastName, mail, photo, country, role, from})
-                    user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], verified, logged, code }).save()
-                    res.status(201).json({
-                        message: 'user signed up from ' + from,
-                        success: true
-                    })
                 }
+                password = bcryptjs.hashSync(password, 10)
+                user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], logged, verified, code }).save()
+                res.status(201).json({
+                    message: 'user signed up from ' + from,
+                    success: true
+                })
             } else {
                 if (user.from.includes(from)) {
                     res.status(200).json({
@@ -110,15 +102,15 @@ const userController = {
                     if (checkPass.length > 0) {
                         user.logged = true
                         await user.save()
-
                         const loginUser = {
                             id: user._id,
                             name: user.name,
+                            lastname: user.lastName,
                             mail: user.mail,
+                            photo: user.photo,
                             role: user.role,
-                            photo: user.photo
                         }
-                        const token = jwt.sign({id: user._id, role: user.role}, process.env.KEY_JWT, {expiresIn: 60*60*24})
+                        const token = jwt.sign({id: user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})
 
                         res.status(200).json({
                             success: true,
@@ -147,11 +139,12 @@ const userController = {
         }
     },
 
-    signInToken:(req, res) => {
-        if (req.user !== null) {            
+    verifyToken:(req, res) => {
+        if (req.user !== null) {
+            const token = jwt.sign({id: req.user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})   
             res.status(200).json({
                 success: true,
-                response: { user: req.user },
+                response: { user: req.user, token: token },
                 message: 'Welcome ' + req.user.name
             })
         } else {
@@ -161,7 +154,6 @@ const userController = {
             }) 
         }
     },
-
 
     signOut: async(req, res) => {
         const { mail } = req.body
