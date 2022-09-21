@@ -4,6 +4,7 @@ const bcryptjs = require('bcryptjs')
 const sendMail = require('./sendMail');
 const Joi = require ('joi')
 const { string, date } = require('joi')
+const jwt = require('jsonwebtoken')
 
 const validator = Joi.object({
     name:Joi.string().min(3).message('INVALID_NAME_LENGTH'), 
@@ -27,23 +28,16 @@ const userController = {
                 let verified = false
                 let code = crypto.randomBytes(15).toString('hex')
                 if (from === 'form') {
-                    password = bcryptjs.hashSync(password, 10)
-                    user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], logged, verified, code }).save()
                     sendMail(mail, code)
-                    res.status(201).json({
-                        message: 'user signed up from form',
-                        success: true
-                    })
                 } else {
                     verified = true
-                    password = bcryptjs.hashSync(password, 10)
-                    result = await validator.validateAsync({name, lastName, mail, photo, country, role, from})
-                    user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], verified, logged, code }).save()
-                    res.status(201).json({
-                        message: 'user signed up from ' + from,
-                        success: true
-                    })
                 }
+                password = bcryptjs.hashSync(password, 10)
+                user = await new User({ name, lastName, mail, password: [password], photo, country, role, from: [from], logged, verified, code }).save()
+                res.status(201).json({
+                    message: 'user signed up from ' + from,
+                    success: true
+                })
             } else {
                 if (user.from.includes(from)) {
                     res.status(200).json({
@@ -106,6 +100,9 @@ const userController = {
                 const checkPass = user.password.filter(passElement => bcryptjs.compareSync(password, passElement))
                 if (from === 'form') {
                     if (checkPass.length > 0) {
+                        user.logged = true
+                        await user.save()
+
                         const loginUser = {
                             id: user._id,
                             name: user.name,
@@ -113,42 +110,17 @@ const userController = {
                             role: user.role,
                             photo: user.photo
                         }
-                        user.logged = true
-                        await user.save()
+                        const token = jwt.sign({id: user._id, role: user.role}, process.env.KEY_JWT, {expiresIn: 60*60*24})
 
                         res.status(200).json({
                             success: true,
-                            response: { user: loginUser },
+                            response: { user: loginUser, token: token },
                             message: 'Welcome' + user.name
                         })
                     } else {
                         res.status(400).json({
                             success: false,
                             message: 'Username or password incorrect'
-                        })
-                    }
-                } else {
-                    if (checkPass.length > 0) {
-                        const loginUser = {
-                            id: user._id,
-                            name: user.name,
-                            mail: user.mail,
-                            role: user.role,
-                            photo: user.photo
-                        }
-                        user.logged = true
-                        await user.save()
-
-                        res.status(200).json({
-                            success: true,
-                            response: { user: loginUser },
-                            message: 'Welcome ' + user.name,
-                            id: user._id
-                        })
-                    } else {
-                        res.status(400).json({
-                            success: false,
-                            message: 'Invalid credentials'
                         })
                     }
                 }
@@ -164,6 +136,21 @@ const userController = {
                 success: false,
                 message: 'Sign In ERROR, try again later'
             })
+        }
+    },
+
+    signInToken:(req, res) => {
+        if (req.user !== null) {            
+            res.status(200).json({
+                success: true,
+                response: { user: req.user },
+                message: 'Welcome ' + req.user.name
+            })
+        } else {
+            res.json({
+                success: false,
+                message: "sign in please!"
+            }) 
         }
     },
 
