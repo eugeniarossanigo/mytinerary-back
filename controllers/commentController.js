@@ -78,7 +78,34 @@ const commentController = {
                 success: false
             })
         }
+    },
+
+    deleteComment: async (req, res) => {
+        const { id } = req.params
+        
+        try {
+            let comment = await Comment.findOneAndDelete({ _id: id })
+            if (comment) {
+                res.status(200).json({
+                    message: 'you have removed the comment',
+                    response: comment,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not removed the comment',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({
+                message: "error",
+                success: false
+            })
+        }
     }
+
     
 }
 module.exports = commentController;
