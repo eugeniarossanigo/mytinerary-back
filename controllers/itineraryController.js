@@ -118,7 +118,6 @@ const itineraryController = {
     likeDislike: async (req,res) => {
         let { id } = req.params
         let userId = req.user.id
-        console.log(id)
 
         try {
             let itinerary = await Itinerary.findOne({_id: id})

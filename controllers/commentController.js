@@ -2,10 +2,9 @@ const Joi = require('joi');
 const Comment = require('../models/Comment');
 
 const validator = Joi.object({
-    comment:Joi.string().max(300).message('INVALID_LENGTH'),
-    user:Joi.string(),
-    itinerary:Joi.string()
-    
+    comment: Joi.string().max(300).message('INVALID_LENGTH'),
+    user: Joi.string(),
+    itinerary: Joi.string()
 })
 
 const commentController = {
@@ -29,6 +28,9 @@ const commentController = {
         let query = {}
         if (req.query.itinerary) {
             query.itinerary = req.query.itinerary
+        }
+        if (req.query.user) {
+            query.user = req.query.user
         }
         try {
             let comments = await Comment.find(query)
@@ -55,7 +57,7 @@ const commentController = {
             })
         }
     },
-    readComment: async (req,res) =>{
+    readComment: async (req,res) => {
         const { id } = req.params
         try {
             let comment = await Comment.findOne({ _id: id })
@@ -79,7 +81,6 @@ const commentController = {
             })
         }
     },
-
     deleteComment: async (req, res) => {
         const { id } = req.params
         
@@ -104,8 +105,32 @@ const commentController = {
                 success: false
             })
         }
+    },
+    updateComment: async (req, res) => {
+        const { id } = req.params
+        const comment = req.body
+        try {
+            let newComment = await Comment.findOneAndUpdate({ _id: id }, comment, { new: true })
+            if (newComment) {
+                res.status(200).json({
+                    message: 'you have updated the comment',
+                    response: newComment,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not update the comment',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                message: "error",
+                success: false
+            })
+        }
     }
-
-    
 }
+
 module.exports = commentController;
