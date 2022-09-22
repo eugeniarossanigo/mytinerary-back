@@ -100,8 +100,6 @@ const userController = {
                 const checkPass = user.password.filter(passElement => bcryptjs.compareSync(password, passElement))
                 if (from === 'form') {
                     if (checkPass.length > 0) {
-                        user.logged = true
-                        await user.save()
                         const loginUser = {
                             id: user._id,
                             name: user.name,
@@ -110,6 +108,9 @@ const userController = {
                             photo: user.photo,
                             role: user.role,
                         }
+                        user.logged = true
+                        await user.save()
+
                         const token = jwt.sign({id: user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})
 
                         res.status(200).json({

@@ -45,7 +45,31 @@ const commentController = {
                 success: false
             })
         }
+    },
+    updateComment: async (req, res) => {
+        const { id } = req.params
+        const itinerary = req.body
+        try {
+            let newComment = await Comment.findOneAndUpdate({ _id: id }, newComment, { new: true })
+            if (newComment) {
+                res.status(200).json({
+                    message: 'you have updated the comment',
+                    response: newComment,
+                    success: true
+                })
+            } else {
+                res.status(404).json({
+                    message: 'could not update the comment',
+                    success: false
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                message: "error",
+                success: false
+            })
+        }
     }
-    
 }
 module.exports = commentController;
