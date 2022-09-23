@@ -109,9 +109,8 @@ const userController = {
                             role: user.role,
                         }
                         user.logged = true
-                        await user.save()
-
                         const token = jwt.sign({id: user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})
+                        await user.save()
 
                         res.status(200).json({
                             success: true,
@@ -123,6 +122,31 @@ const userController = {
                             success: false,
                             message: 'Username or password incorrect'
                         })
+                    }
+                } else {
+                    if (checkPass.length > 0) {
+                        const loginUser = {
+                            id: user._id,
+                            name: user.name,
+                            lastname: user.lastName,
+                            mail: user.mail,
+                            role: user.role,
+                            photo: user.photo,
+                        }
+                        user.logged = true;
+                        const token = jwt.sign({id: user._id}, process.env.KEY_JWT, {expiresIn: 60*60*24})
+                        await user.save();
+                        
+                        res.status(200).json({
+                            success: true,
+                            response: { user: loginUser, token: token },
+                            message: "Welcome " + user.name,
+                        });
+                    } else {
+                        res.status(400).json({
+                          success: false,
+                          message: "Invalid credentials",
+                        });
                     }
                 }
             } else {
