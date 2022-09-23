@@ -41,12 +41,22 @@ describe('POST /itineraries', function () {
     }) 
 })
 
+    describe('GET /itineraries', function () {
+        id = "6318b8f20c1f1f1e4d58e2be"
+        it('Must respond with 200 status code you get the itinerary', function (done) {
+            request(app)
+                .get('/itineraries/' + id)
+                .expect(200, done)
+        })
+        
+    })
+
 describe('DELETE /itineraries', function () {
     id = "63197bbbcb6d35a00e73e411"
     it('Must detele itinerary', function (done) {
         request(app)
             .del('/itineraries/'+id)
             .expect(200, done)
-            })
     })
+})
 

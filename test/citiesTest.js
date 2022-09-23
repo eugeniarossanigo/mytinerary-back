@@ -37,7 +37,6 @@ describe('POST /cities', function () {
     })
 })
 
-
 describe('PUT /cities', function () {
     it('Must update city', function (done) {
         let cityTestUpdate = {

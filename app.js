@@ -11,7 +11,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var cityRouter = require('./routes/cities');
-var userRouter = require('./routes/users');
+var userRouter = require('./routes/auth');
 var itineraryRouter = require('./routes/itineraries');
 var activityRouter = require('./routes/activities');
 var commentRouter = require('./routes/comments');
@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/cities', cityRouter)
+app.use('/cities', cityRouter);
 app.use('/auth', userRouter);
 app.use('/itineraries', itineraryRouter);
 app.use('/activities', activityRouter);
