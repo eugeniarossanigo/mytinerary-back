@@ -7,8 +7,8 @@ const { createItinerary, updateItinerary, deleteItinerary, readAllItineraries, l
 router.post('/', createItinerary)
 router.get('/', readAllItineraries)
 router.get('/:id', readItinerary)
-router.put('/:id', updateItinerary)
+router.patch('/:id', updateItinerary)
 router.delete('/:id', deleteItinerary)
-router.patch('/like/:id', passport.authenticate('jwt', {session:false}), likeDislike)
+router.patch('/likes/:id', passport.authenticate('jwt', {session:false}), likeDislike)
 
 module.exports = router;
