@@ -3,13 +3,13 @@ const Joi = require ('joi')
 const { string, date } = require('joi')
 
 const validator = Joi.object({
-    city:Joi.string(),
-    province:Joi.string(), 
-    country:Joi.string(), 
-    photo:Joi.string().uri().message('INVALID_URI'),
-    population:Joi.number().integer().min(1000).max(100000000).message('INVALID_POPULATION_NUMBER'),
+    city: Joi.string(),
+    province: Joi.string(), 
+    country: Joi.string(), 
+    photo: Joi.string().uri().message('INVALID_URI'),
+    population: Joi.number().integer().min(1000).max(100000000).message('INVALID_POPULATION_NUMBER'),
     fundation: Joi.date().less(new Date()).message('INVALID_FUNDATION_DATE'),
-    description:Joi.string().max(2000).message('INVALID_DESCRIPTION_STRING')
+    description: Joi.string().max(2000).message('INVALID_DESCRIPTION_STRING')
 })
 
 const cityController = {

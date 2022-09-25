@@ -3,15 +3,14 @@ const Joi = require ('joi')
 const { string, date } = require('joi');
 const { json } = require('express');
 
-
 const validator = Joi.object({
-    name:Joi.string().min(8).message('INVALID_NAME_LENGTH'),
-    user:Joi.string(), 
-    city:Joi.string().min(3).message('INVALID_CITY_LENGTH'), 
-    price:Joi.number().min(1000).message('INVALID_PRICE_NUMBER'),
-    likes:Joi.array(),
+    name: Joi.string().min(8).message('INVALID_NAME_LENGTH'),
+    user: Joi.string(), 
+    city: Joi.string().min(3).message('INVALID_CITY_LENGTH'), 
+    price: Joi.number().min(1000).message('INVALID_PRICE_NUMBER'),
+    likes: Joi.array(),
     tags: Joi.array(),
-    duration:Joi.number().min(1).message('INVALID_DURATION_NUMBER')
+    duration: Joi.number().min(1).message('INVALID_DURATION_NUMBER')
 })
 
 const itineraryController = {
@@ -91,7 +90,7 @@ const itineraryController = {
         }
         try {
             let itineraries = await Itinerary.find(query)
-            .populate('user', {name:1, lastName:1, photo:1})
+            .populate('user', {name:1, lastName:1, photo:1, country:1, mail:1})
             .populate('city', {city:1})
 
             if (itineraries) {

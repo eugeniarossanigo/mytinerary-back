@@ -99,7 +99,7 @@ Activity.create(
     // purmamarca
     {
         name: 'Cerro de los Siete Colores',
-        photo: 'http://drive.google.com/uc?export=view&id=1UbE3qbX1LgkZCCe5MzbOWCHrGq8iRirf/',
+        photo: 'http://drive.google.com/uc?export=view&id=1UbE3qbX1LgkZCCe5MzbOWCHrGq8iRirf',
         itinerary: '6318b8f20c1f1f1e4d58e2c2'
     },
     {
