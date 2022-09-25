@@ -7,14 +7,14 @@ const { string, date } = require('joi')
 const jwt = require('jsonwebtoken')
 
 const validator = Joi.object({
-    name:Joi.string().min(3).message('INVALID_NAME_LENGTH'), 
-    lastName:Joi.string().min(3).message('INVALID_LASTNAME_LENGTH'),
-    mail:Joi.string().min(3).email().message('INVALID_EMAIL'),
-    password:Joi.string().min(8).max(50).message('INVALID_PASSWORD'),
-    photo:Joi.string().uri().message('INVALID_PHOTO_URI'),
-    country:Joi.string(),
-    role:Joi.string(),
-    from:Joi.string()
+    name: Joi.string().min(3).message('INVALID_NAME_LENGTH'), 
+    lastName: Joi.string().min(3).message('INVALID_LASTNAME_LENGTH'),
+    mail: Joi.string().min(3).email().message('INVALID_EMAIL'),
+    password: Joi.string().min(8).max(50).message('INVALID_PASSWORD'),
+    photo: Joi.string().uri().message('INVALID_PHOTO_URI'),
+    country: Joi.string(),
+    role: Joi.string(),
+    from: Joi.string()
 })
 
 const userController = {
