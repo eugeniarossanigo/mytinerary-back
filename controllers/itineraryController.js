@@ -5,7 +5,7 @@ const { json } = require('express');
 
 
 const validator = Joi.object({
-    name:Joi.string().min(8).message('INVALID_NAME_LENGTH'),
+    name:Joi.string(),
     user:Joi.string(), 
     city:Joi.string().min(3).message('INVALID_CITY_LENGTH'), 
     price:Joi.number().min(1000).message('INVALID_PRICE_NUMBER'),

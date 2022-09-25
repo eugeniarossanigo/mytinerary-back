@@ -7,29 +7,29 @@ describe('POST /signin', function () {
         request(app)
             .post('/auth/signin')
             .send({
-                mail:'marcodasjhdsajhd9@gmail.com' ,
+                mail: 'marcodasjhdsajhd9@gmail.com',
                 password: '12343242332432np',
                 from: 'form'
             })
             .expect(404, done)
     }),
 
-    it('Must respond with 201 status code', function (done) {
-        request(app)
-            .post('/auth/signin')
-            .send({
-                mail:'marcosamu9@gmail.com' ,
-                password: '12343242332432np',
-                from: 'form'
-            })
-            .expect(200, done)
-    })
+        it('Must respond with 201 status code', function (done) {
+            request(app)
+                .post('/auth/signin')
+                .send({
+                    mail: 'marcosamu9@gmail.com',
+                    password: '12343242332432np',
+                    from: 'form'
+                })
+                .expect(200, done)
+        })
 
     it('Must respond with 201 status code', function (done) {
         request(app)
             .post('/auth/signin')
             .send({
-                mail:'amuchasteguiesequiel@gmail.com' ,
+                mail: 'amuchasteguiesequiel@gmail.com',
                 password: '123456789ese',
                 from: 'google'
             })
@@ -38,7 +38,7 @@ describe('POST /signin', function () {
                 assert.isString(response.body.id)
                 done()
             }).catch(done)
-        })
     })
+})
 
 
