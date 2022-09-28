@@ -6,7 +6,7 @@ const { createItinerary, updateItinerary, deleteItinerary, readAllItineraries, r
 
 router.post('/', createItinerary)
 router.get('/', readAllItineraries)
-router.get('/:id', passport.authenticate('jwt', {session:false}), readItinerary)
+router.get('/:id', readItinerary)
 router.patch('/:id', updateItinerary)
 router.delete('/:id', deleteItinerary)
 router.patch('/likes/:id', passport.authenticate('jwt', {session:false}), likeDislike)

@@ -6,7 +6,7 @@ const { createComment, readAllComments, readComment, deleteComment, updateCommen
 
 router.post('/', passport.authenticate('jwt',{session:false}), createComment)
 router.get('/', readAllComments)
-router.get('/:id', passport.authenticate('jwt', {session:false}), readComment)
+router.get('/:id', readComment)
 router.delete('/:id', passport.authenticate('jwt', {session:false}), deleteComment)
 router.patch('/:id', passport.authenticate('jwt', {session:false}), updateComment);
 
